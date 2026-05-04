@@ -1,9 +1,19 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        app: {
+          background: "var(--app-background)",
+          surface: "var(--app-surface)",
+          "surface-muted": "var(--app-surface-muted)",
+          border: "var(--app-border)",
+          text: "var(--app-text)",
+          "text-muted": "var(--app-text-muted)",
+          accent: "var(--app-accent)",
+        },
         neutral: {
           0: "hsl(0, 0%, 100%)",
           200: "hsl(250, 6%, 84%)",

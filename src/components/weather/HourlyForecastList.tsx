@@ -23,9 +23,9 @@ function HourlyForecastList({ hourly }: HourlyForecastListProps) {
         return (
           <article
             key={forecast.time}
-            className="flex min-w-24 flex-col items-center gap-3 rounded-lg bg-neutral-700 px-4 py-4 text-center"
+            className="flex min-w-24 flex-col items-center gap-3 rounded-lg bg-app-surface-muted px-4 py-4 text-center"
           >
-            <p className="text-sm font-semibold text-neutral-200">
+            <p className="text-sm font-semibold text-app-text-muted">
               {formatHour(forecast.time)}
             </p>
             <img
@@ -34,10 +34,10 @@ function HourlyForecastList({ hourly }: HourlyForecastListProps) {
               className="size-12 object-contain"
               aria-hidden="true"
             />
-            <p className="text-2xl font-bold text-neutral-0">
+            <p className="text-2xl font-bold text-app-text">
               {formatTemperature(forecast.temperature)}
             </p>
-            <p className="text-xs font-medium text-neutral-300">
+            <p className="text-xs font-medium text-app-text-muted">
               {forecast.precipitationProbability}%
             </p>
           </article>

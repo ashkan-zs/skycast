@@ -27,14 +27,14 @@ function Forecast({ daily, hourly }: ForecastProps) {
   const [activeView, setActiveView] = useState<ForecastView>("daily");
 
   return (
-    <section className="rounded-lg border border-neutral-600 bg-neutral-800 p-4 shadow-[0_24px_60px_rgba(0,0,0,0.2)] sm:p-5">
+    <section className="rounded-lg border border-app-border bg-app-surface p-4 shadow-[0_24px_60px_rgba(0,0,0,0.16)] sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="font-display text-2xl font-bold text-neutral-0">
+        <h2 className="font-display text-2xl font-bold text-app-text">
           Forecast
         </h2>
 
         <div
-          className="grid grid-cols-2 rounded-lg bg-neutral-700 p-1"
+          className="grid grid-cols-2 rounded-lg bg-app-surface-muted p-1"
           role="tablist"
           aria-label="Forecast view"
         >
@@ -50,7 +50,7 @@ function Forecast({ daily, hourly }: ForecastProps) {
                 className={`rounded-md px-4 py-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-orange-500 ${
                   isActive
                     ? "bg-blue-500 text-neutral-0"
-                    : "text-neutral-200 hover:bg-neutral-600 hover:text-neutral-0"
+                    : "text-app-text-muted hover:bg-app-border hover:text-app-text"
                 }`}
                 onClick={() => setActiveView(tab.value)}
               >

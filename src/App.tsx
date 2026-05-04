@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import AppLayout from "./components/layout/AppLayout";
 import SavedLocations from "./components/locations/SavedLocations";
 import SearchBar from "./components/search/SearchBar";
+import ThemeToggle from "./components/theme/ThemeToggle";
 import CurrentWeatherCard from "./components/weather/CurrentWeatherCard";
 import Forecast from "./components/weather/Forecast";
 import type { SavedLocation } from "./types/location";
@@ -209,9 +210,12 @@ function App() {
   return (
     <AppLayout>
       <section className="mx-auto flex w-full max-w-3xl flex-col gap-6 pt-8 sm:pt-12 lg:pt-16">
-        <h1 className="font-display text-4xl font-bold leading-tight text-neutral-0 sm:text-5xl">
-          Weather
-        </h1>
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="font-display text-4xl font-bold leading-tight text-app-text sm:text-5xl">
+            SkyCast
+          </h1>
+          <ThemeToggle />
+        </div>
         <SearchBar onLocationSelect={handleLocationSelect} />
         <SavedLocations
           locations={savedLocations}
@@ -221,13 +225,13 @@ function App() {
         />
 
         {isWeatherLoading ? (
-          <div className="rounded-lg border border-neutral-600 bg-neutral-800 p-6 text-base font-medium text-neutral-200">
+          <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
             Loading current weather...
           </div>
         ) : null}
 
         {weatherError !== "" ? (
-          <div className="rounded-lg border border-neutral-600 bg-neutral-800 p-6 text-base font-medium text-neutral-200">
+          <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
             {weatherError}
           </div>
         ) : null}

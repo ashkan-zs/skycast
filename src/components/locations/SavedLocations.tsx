@@ -18,9 +18,9 @@ function SavedLocations({
   }
 
   return (
-    <section className="rounded-lg border border-neutral-600 bg-neutral-800 p-4 shadow-[0_18px_45px_rgba(0,0,0,0.18)] sm:p-5">
+    <section className="rounded-lg border border-app-border bg-app-surface p-4 shadow-[0_18px_45px_rgba(0,0,0,0.14)] sm:p-5">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="font-display text-xl font-bold text-neutral-0">
+        <h2 className="font-display text-xl font-bold text-app-text">
           Saved locations
         </h2>
       </div>
@@ -34,8 +34,8 @@ function SavedLocations({
               key={location.id}
               className={`flex items-center justify-between gap-3 rounded-lg border p-3 ${
                 isActive
-                  ? "border-blue-500 bg-neutral-700"
-                  : "border-neutral-600 bg-neutral-700/60"
+                  ? "border-blue-500 bg-app-surface-muted"
+                  : "border-app-border bg-app-surface-muted/60"
               }`}
             >
               <button
@@ -43,17 +43,17 @@ function SavedLocations({
                 className="min-w-0 text-left focus:outline-none focus:ring-2 focus:ring-orange-500"
                 onClick={() => onLocationSelect(location)}
               >
-                <span className="block truncate text-sm font-bold text-neutral-0">
+                <span className="block truncate text-sm font-bold text-app-text">
                   {location.name}
                 </span>
-                <span className="block truncate text-xs font-medium text-neutral-300">
+                <span className="block truncate text-xs font-medium text-app-text-muted">
                   {[location.admin1, location.country].filter(Boolean).join(", ")}
                 </span>
               </button>
 
               <button
                 type="button"
-                className="shrink-0 rounded-md px-3 py-2 text-xs font-bold text-neutral-200 transition hover:bg-neutral-600 hover:text-neutral-0 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="shrink-0 rounded-md px-3 py-2 text-xs font-bold text-app-text-muted transition hover:bg-app-border hover:text-app-text focus:outline-none focus:ring-2 focus:ring-orange-500"
                 onClick={() => onLocationRemove(location.id)}
               >
                 Remove

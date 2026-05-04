@@ -40,19 +40,43 @@
   --color-orange-500: hsl(28, 100%, 52%);
   --color-blue-500: hsl(233, 67%, 56%);
   --color-blue-700: hsl(248, 70%, 36%);
+  --color-app-background: var(--app-background);
+  --color-app-surface: var(--app-surface);
+  --color-app-surface-muted: var(--app-surface-muted);
+  --color-app-border: var(--app-border);
+  --color-app-text: var(--app-text);
+  --color-app-text-muted: var(--app-text-muted);
+  --color-app-accent: var(--app-accent);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
 }
 
 :root {
-  color: hsl(0, 0%, 100%);
-  background: hsl(243, 96%, 9%);
+  --app-background: hsl(250, 6%, 84%);
+  --app-surface: hsl(0, 0%, 100%);
+  --app-surface-muted: hsl(250, 6%, 84%);
+  --app-border: hsl(240, 6%, 70%);
+  --app-text: hsl(243, 96%, 9%);
+  --app-text-muted: hsl(243, 23%, 30%);
+  --app-accent: hsl(233, 67%, 56%);
+  color: var(--app-text);
+  background: var(--app-background);
   font-family: "DM Sans", system-ui, sans-serif;
   font-size: 18px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  --app-background: hsl(243, 96%, 9%);
+  --app-surface: hsl(243, 27%, 20%);
+  --app-surface-muted: hsl(243, 23%, 24%);
+  --app-border: hsl(243, 23%, 30%);
+  --app-text: hsl(0, 0%, 100%);
+  --app-text-muted: hsl(250, 6%, 84%);
+  --app-accent: hsl(28, 100%, 52%);
 }
 
 * {
@@ -63,6 +87,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  transition:
+    background-color 240ms ease,
+    color 240ms ease;
 }
 
 button,
@@ -76,15 +103,33 @@ textarea {
   background:
     radial-gradient(
       circle at top left,
-      color-mix(in srgb, hsl(233, 67%, 56%) 35%, transparent) 0,
+      color-mix(in srgb, var(--app-accent) 28%, transparent) 0,
       transparent 28rem
     ),
     radial-gradient(
       circle at bottom right,
-      color-mix(in srgb, hsl(28, 100%, 52%) 18%, transparent) 0,
+      color-mix(in srgb, var(--color-orange-500) 16%, transparent) 0,
       transparent 24rem
     ),
-    linear-gradient(180deg, hsl(243, 27%, 20%) 0%, hsl(243, 96%, 9%) 58%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--app-surface) 90%, var(--app-background)) 0%,
+      var(--app-background) 58%
+    );
+  transition:
+    background 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease;
+}
+
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    fill 240ms ease,
+    stroke 240ms ease;
 }
 
 .scrollbar-clean {
@@ -93,4 +138,14 @@ textarea {
 
 .scrollbar-clean::-webkit-scrollbar {
   display: none;
+}
+
+.today-card {
+  background-image: url("./assets/images/bg-today-small.svg");
+}
+
+@media (min-width: 640px) {
+  .today-card {
+    background-image: url("./assets/images/bg-today-large.svg");
+  }
 }

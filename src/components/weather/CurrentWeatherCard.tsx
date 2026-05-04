@@ -59,15 +59,17 @@ function CurrentWeatherCard({
   ];
 
   return (
-    <article className="overflow-hidden rounded-lg border border-neutral-600 bg-neutral-800 shadow-[0_24px_60px_rgba(0,0,0,0.24)]">
-      <div className="relative isolate flex min-h-72 flex-col justify-between gap-8 overflow-hidden bg-[url('./assets/images/bg-today-small.svg')] bg-cover bg-center p-5 sm:min-h-80 sm:bg-[url('./assets/images/bg-today-large.svg')] sm:p-8">
+    <article className="overflow-hidden rounded-lg border border-app-border bg-app-surface shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+      <div className="today-card relative isolate flex min-h-72 flex-col justify-between gap-8 overflow-hidden bg-cover bg-center p-5 sm:min-h-80 sm:p-8">
         <div className="absolute inset-0 -z-10 bg-neutral-900/20" />
 
         {canSave ? (
           <button
             type="button"
             className={`absolute right-4 top-4 grid size-11 place-items-center rounded-md transition focus:outline-none focus:ring-2 focus:ring-orange-500 sm:right-6 sm:top-6 ${
-              isSaved ? "text-orange-500" : "text-neutral-0 hover:text-neutral-200"
+              isSaved
+                ? "text-orange-500"
+                : "text-neutral-0 hover:text-neutral-200"
             }`}
             onClick={onFavoriteToggle}
             aria-label={
@@ -94,7 +96,9 @@ function CurrentWeatherCard({
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <p className="text-base font-medium text-neutral-200">Current weather</p>
+            <p className="text-base font-medium text-neutral-200">
+              Current weather
+            </p>
             <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-neutral-0 sm:text-5xl">
               {cityName}
             </h2>
@@ -123,7 +127,9 @@ function CurrentWeatherCard({
                   <span className="size-4 rounded-full bg-current" />
                 </span>
                 <div>
-                  <p className="text-xs font-medium text-neutral-300">Sunrise</p>
+                  <p className="text-xs font-medium text-neutral-300">
+                    Sunrise
+                  </p>
                   <p className="text-base font-bold text-neutral-0">
                     {formatTime(sunrise)}
                   </p>
@@ -147,13 +153,13 @@ function CurrentWeatherCard({
         </div>
       </div>
 
-      <dl className="grid grid-cols-2 gap-px bg-neutral-600 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-px bg-app-border sm:grid-cols-4">
         {metrics.map((metric) => (
-          <div key={metric.label} className="bg-neutral-800 p-4 sm:p-5">
-            <dt className="text-sm font-medium text-neutral-300">
+          <div key={metric.label} className="bg-app-surface p-4 sm:p-5">
+            <dt className="text-sm font-medium text-app-text-muted">
               {metric.label}
             </dt>
-            <dd className="mt-2 text-lg font-bold text-neutral-0 sm:text-xl">
+            <dd className="mt-2 text-lg font-bold text-app-text sm:text-xl">
               {metric.value}
             </dd>
           </div>

@@ -1,4 +1,11 @@
-import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import searchIcon from "../../assets/images/icon-search.svg";
 import {
   fetchLocation,
@@ -145,21 +152,21 @@ function SearchBar({
       <label className="sr-only" htmlFor={inputId}>
         Search for a city
       </label>
-      <div className="flex min-h-14 w-full items-center gap-2 rounded-lg border border-neutral-600 bg-neutral-800 p-2 shadow-[0_18px_45px_rgba(0,0,0,0.22)] focus-within:border-blue-500 sm:min-h-16 sm:gap-3 sm:p-3">
+      <div className="flex min-h-14 w-full items-center gap-2 rounded-lg border border-app-border bg-app-surface p-2 shadow-[0_18px_45px_rgba(0,0,0,0.16)] focus-within:border-blue-500 sm:min-h-16 sm:gap-3 sm:p-3">
         <input
           id={inputId}
           type="search"
           value={query}
           placeholder={placeholder}
           autoComplete="off"
-          className="min-w-0 flex-1 bg-transparent px-2 text-base font-medium text-neutral-0 outline-none placeholder:text-neutral-300 sm:px-3"
+          className="min-w-0 flex-1 bg-transparent px-2 text-base font-medium text-app-text outline-none placeholder:text-app-text-muted sm:px-3"
           onChange={handleQueryChange}
           onFocus={() => setIsFocused(true)}
         />
         <button
           type="submit"
           disabled={normalizedQuery.length < 2 || isLoading}
-          className="grid size-11 shrink-0 place-items-center rounded-md bg-blue-500 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-600 sm:size-12"
+          className="grid size-11 shrink-0 place-items-center rounded-md bg-blue-500 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-app-surface disabled:cursor-not-allowed disabled:bg-app-border sm:size-12"
           aria-label="Search city"
         >
           <img src={searchIcon} alt="" className="size-5" aria-hidden="true" />
@@ -167,15 +174,15 @@ function SearchBar({
       </div>
 
       {shouldShowSuggestions ? (
-        <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-lg border border-neutral-600 bg-neutral-800 shadow-[0_18px_45px_rgba(0,0,0,0.28)]">
+        <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-lg border border-app-border bg-app-surface shadow-[0_18px_45px_rgba(0,0,0,0.22)]">
           {isLoading ? (
-            <p className="px-4 py-3 text-sm font-medium text-neutral-200">
+            <p className="px-4 py-3 text-sm font-medium text-app-text-muted">
               Searching...
             </p>
           ) : null}
 
           {!isLoading && errorMessage !== "" ? (
-            <p className="px-4 py-3 text-sm font-medium text-neutral-200">
+            <p className="px-4 py-3 text-sm font-medium text-app-text-muted">
               {errorMessage}
             </p>
           ) : null}
@@ -186,13 +193,13 @@ function SearchBar({
                 <li key={location.id}>
                   <button
                     type="button"
-                    className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left transition hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none"
+                    className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left transition hover:bg-app-surface-muted focus:bg-app-surface-muted focus:outline-none"
                     onClick={() => handleLocationSelect(location)}
                   >
-                    <span className="text-sm font-semibold text-neutral-0 sm:text-base">
+                    <span className="text-sm font-semibold text-app-text sm:text-base">
                       {location.name}
                     </span>
-                    <span className="text-xs font-medium text-neutral-300 sm:text-sm">
+                    <span className="text-xs font-medium text-app-text-muted sm:text-sm">
                       {[location.admin1, location.country]
                         .filter(Boolean)
                         .join(", ")}
