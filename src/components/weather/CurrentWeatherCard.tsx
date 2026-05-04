@@ -4,6 +4,9 @@ import { getWeatherCondition } from "./weatherConditions";
 interface CurrentWeatherCardProps {
   cityName: string;
   weather: CurrentWeather;
+  canSave?: boolean;
+  isSaved?: boolean;
+  onFavoriteToggle?: () => void;
 }
 
 interface WeatherMetric {
@@ -17,7 +20,13 @@ const formatTemperature = (temperature: number): string =>
 const formatWindSpeed = (windSpeed: number): string =>
   `${Math.round(windSpeed)} km/h`;
 
-function CurrentWeatherCard({ cityName, weather }: CurrentWeatherCardProps) {
+function CurrentWeatherCard({
+  cityName,
+  weather,
+  canSave = false,
+  isSaved = false,
+  onFavoriteToggle,
+}: CurrentWeatherCardProps) {
   const condition = getWeatherCondition(weather.weatherCode);
   const metrics: WeatherMetric[] = [
     {
@@ -43,8 +52,37 @@ function CurrentWeatherCard({ cityName, weather }: CurrentWeatherCardProps) {
       <div className="relative isolate flex min-h-72 flex-col justify-between gap-8 overflow-hidden bg-[url('./assets/images/bg-today-small.svg')] bg-cover bg-center p-5 sm:min-h-80 sm:bg-[url('./assets/images/bg-today-large.svg')] sm:p-8">
         <div className="absolute inset-0 -z-10 bg-neutral-900/20" />
 
+        {canSave ? (
+          <button
+            type="button"
+            className={`absolute right-4 top-4 grid size-11 place-items-center rounded-md transition focus:outline-none focus:ring-2 focus:ring-orange-500 sm:right-6 sm:top-6 ${
+              isSaved ? "text-orange-500" : "text-neutral-0 hover:text-neutral-200"
+            }`}
+            onClick={onFavoriteToggle}
+            aria-label={
+              isSaved ? "Remove saved location" : "Save current location"
+            }
+            title={isSaved ? "Remove saved location" : "Save location"}
+          >
+            <svg
+              className="size-5"
+              viewBox="0 0 24 24"
+              fill={isSaved ? "currentColor" : "none"}
+              aria-hidden="true"
+            >
+              <path
+                d="M6 4.75C6 3.784 6.784 3 7.75 3h8.5C17.216 3 18 3.784 18 4.75v16L12 17l-6 3.75v-16Z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.8"
+              />
+            </svg>
+          </button>
+        ) : null}
+
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
+          <div className="min-w-0">
             <p className="text-base font-medium text-neutral-200">Current weather</p>
             <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-neutral-0 sm:text-5xl">
               {cityName}
