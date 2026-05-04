@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import AppLayout from "./components/layout/AppLayout";
 import SearchBar from "./components/search/SearchBar";
 import CurrentWeatherCard from "./components/weather/CurrentWeatherCard";
+import Forecast from "./components/weather/Forecast";
 import {
   fetchWeather,
   type LocationResult,
@@ -69,7 +70,13 @@ function App() {
         ) : null}
 
         {!isWeatherLoading && weatherData ? (
-          <CurrentWeatherCard cityName={selectedCity} weather={weatherData.current} />
+          <>
+            <CurrentWeatherCard
+              cityName={selectedCity}
+              weather={weatherData.current}
+            />
+            <Forecast daily={weatherData.daily} hourly={weatherData.hourly} />
+          </>
         ) : null}
       </section>
     </AppLayout>

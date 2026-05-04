@@ -86,3 +86,11 @@ textarea {
     ),
     linear-gradient(180deg, hsl(243, 27%, 20%) 0%, hsl(243, 96%, 9%) 58%);
 }
+
+.scrollbar-clean {
+  scrollbar-width: none;
+}
+
+.scrollbar-clean::-webkit-scrollbar {
+  display: none;
+}
