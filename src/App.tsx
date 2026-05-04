@@ -237,6 +237,8 @@ function App() {
             <CurrentWeatherCard
               cityName={selectedCity}
               weather={weatherData.current}
+              sunrise={weatherData.daily[0]?.sunrise}
+              sunset={weatherData.daily[0]?.sunset}
               canSave={selectedLocation !== null}
               isSaved={isSelectedLocationSaved}
               onFavoriteToggle={handleFavoriteToggle}

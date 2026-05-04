@@ -4,6 +4,8 @@ import { getWeatherCondition } from "./weatherConditions";
 interface CurrentWeatherCardProps {
   cityName: string;
   weather: CurrentWeather;
+  sunrise?: string;
+  sunset?: string;
   canSave?: boolean;
   isSaved?: boolean;
   onFavoriteToggle?: () => void;
@@ -20,9 +22,18 @@ const formatTemperature = (temperature: number): string =>
 const formatWindSpeed = (windSpeed: number): string =>
   `${Math.round(windSpeed)} km/h`;
 
+const formatTime = (time: string): string =>
+  new Intl.DateTimeFormat("en", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date(time));
+
 function CurrentWeatherCard({
   cityName,
   weather,
+  sunrise,
+  sunset,
   canSave = false,
   isSaved = false,
   onFavoriteToggle,
@@ -104,6 +115,35 @@ function CurrentWeatherCard({
           <p className="text-xl font-semibold text-neutral-0 sm:text-2xl">
             {condition.description}
           </p>
+          {sunrise && sunset ? (
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
+                <span className="relative grid size-9 shrink-0 place-items-center text-orange-500">
+                  <span className="absolute bottom-2 h-px w-7 bg-current" />
+                  <span className="size-4 rounded-full bg-current" />
+                </span>
+                <div>
+                  <p className="text-xs font-medium text-neutral-300">Sunrise</p>
+                  <p className="text-base font-bold text-neutral-0">
+                    {formatTime(sunrise)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
+                <span className="relative grid size-9 shrink-0 place-items-center text-blue-500">
+                  <span className="absolute top-2 h-px w-7 bg-current" />
+                  <span className="size-4 rounded-full bg-current" />
+                </span>
+                <div>
+                  <p className="text-xs font-medium text-neutral-300">Sunset</p>
+                  <p className="text-base font-bold text-neutral-0">
+                    {formatTime(sunset)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
 
