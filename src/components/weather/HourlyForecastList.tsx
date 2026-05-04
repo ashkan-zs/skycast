@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import type { HourlyForecast } from "../../services/weatherService";
 import { getWeatherCondition } from "./weatherConditions";
 
@@ -15,8 +16,52 @@ const formatHour = (time: string): string =>
   }).format(new Date(time));
 
 function HourlyForecastList({ hourly }: HourlyForecastListProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollLeftRef = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!scrollContainerRef.current) {
+      return;
+    }
+
+    setIsDragging(true);
+    dragStartXRef.current = event.clientX;
+    dragStartScrollLeftRef.current = scrollContainerRef.current.scrollLeft;
+    scrollContainerRef.current.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging || !scrollContainerRef.current) {
+      return;
+    }
+
+    event.preventDefault();
+    scrollContainerRef.current.scrollLeft =
+      dragStartScrollLeftRef.current - (event.clientX - dragStartXRef.current);
+  };
+
+  const stopDragging = (event: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(false);
+
+    if (scrollContainerRef.current?.hasPointerCapture(event.pointerId)) {
+      scrollContainerRef.current.releasePointerCapture(event.pointerId);
+    }
+  };
+
   return (
-    <div className="scrollbar-clean -mx-4 mt-5 flex gap-3 overflow-x-auto px-4 pb-2 sm:-mx-5 sm:px-5">
+    <div
+      ref={scrollContainerRef}
+      className={`scrollbar-clean -mx-4 mt-5 flex gap-3 overflow-x-auto px-4 pb-2 select-none sm:-mx-5 sm:px-5 ${
+        isDragging ? "cursor-grabbing" : "cursor-grab"
+      }`}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={stopDragging}
+      onPointerCancel={stopDragging}
+      onPointerLeave={stopDragging}
+    >
       {hourly.map((forecast) => {
         const condition = getWeatherCondition(forecast.weatherCode);
 
