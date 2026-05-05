@@ -1,88 +1,109 @@
-# SkyCast
+# 🌤️ SkyCast — Modern Weather Dashboard
 
-SkyCast is a responsive weather app built with Vite, React, TypeScript, and Tailwind CSS. It uses Open-Meteo for forecast data and geocoding, supports current-location weather, saved locations, 24-hour and 7-day forecasts, and automatic light/dark theming based on local time.
+🔗 **Live Demo:** https://skycast-ashkan-zs.vercel.app
 
-## Features
+---
 
-- Search for cities with Open-Meteo geocoding suggestions.
-- Automatically load weather for the user's current location on first visit.
-- Display current temperature, weather condition, feels-like temperature, humidity, wind speed, precipitation, sunrise, and sunset.
-- Switch between daily and hourly forecasts.
-- Drag-scroll the hourly forecast list with mouse or pointer input.
-- Save frequently checked locations with `localStorage`.
-- Automatically use light mode from 6am to 6pm and dark mode from 6pm to 6am.
-- Manually toggle light/dark mode for the current session without saving the override.
+## ✨ Overview
 
-## Tech Stack
+**SkyCast** is a modern, responsive weather web application built with React and TypeScript.
+It delivers real-time weather data with a clean UI and smooth user experience.
 
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS 4
-- Open-Meteo Forecast API
-- Open-Meteo Geocoding API
+This project demonstrates my ability to build **API-driven frontend applications**, manage state effectively, and create scalable, production-ready UI.
 
-## Getting Started
+---
 
-Install dependencies:
+## 🚀 Features
+
+* 🌍 Auto-detect user location on first visit
+* 🔍 Smart city search with suggestions (Open-Meteo geocoding)
+* ⭐ Save favorite locations (localStorage)
+* 🌡️ Detailed current weather data:
+
+  * Temperature, feels-like, humidity
+  * Wind speed, precipitation
+  * Sunrise & sunset
+* 📊 24-hour and 7-day forecasts
+* 🖱️ Drag-to-scroll hourly forecast
+* 🌗 Automatic light/dark mode based on local time
+* 🎛️ Manual theme toggle (session-based)
+* 📱 Fully responsive (mobile-first design)
+
+---
+
+## 🛠️ Tech Stack
+
+* **React 19**
+* **TypeScript**
+* **Vite**
+* **Tailwind CSS 4**
+* **Open-Meteo APIs**
+
+  * Forecast API
+  * Geocoding API
+
+---
+
+## 🧠 What This Project Demonstrates
+
+* Building responsive, production-ready UI
+* Working with external APIs and async data
+* Component-based architecture in React
+* Clean code structure and maintainability
+* Real-world UX patterns (search, favorites, theming)
+
+---
+
+## ⚙️ Getting Started
 
 ```bash
+# Install dependencies
 npm install
-```
 
-Start the development server:
-
-```bash
+# Run development server
 npm run dev
-```
 
-Create a production build:
-
-```bash
+# Build for production
 npm run build
-```
 
-Preview the production build:
-
-```bash
+# Preview production build
 npm run preview
-```
 
-Run lint checks:
-
-```bash
+# Run lint checks
 npm run lint
 ```
 
-## Project Structure
+---
 
-```text
-src/
-  components/
-    layout/        App shell and page layout
-    locations/     Saved locations UI
-    search/        City search and suggestions
-    theme/         Theme provider, context, and toggle
-    weather/       Current, daily, and hourly weather components
-  hooks/           Time-based theme hook
-  services/        Open-Meteo data fetching and transforms
-  types/           Shared TypeScript interfaces
-```
+## 🌐 Data Source
 
-## Data Source
+SkyCast uses free APIs from **Open-Meteo**:
 
-SkyCast uses the free Open-Meteo APIs:
+* Forecast: https://api.open-meteo.com/v1/forecast
+* Geocoding: https://geocoding-api.open-meteo.com/v1/search
 
-- Forecast: `https://api.open-meteo.com/v1/forecast`
-- Geocoding: `https://geocoding-api.open-meteo.com/v1/search`
+No API key required.
 
-No API key is required.
+---
 
-## Theme Behavior
+## 🌗 Theme System
 
-The app uses Tailwind's `darkMode: "class"` strategy. The theme hook checks the user's local hour:
+The app automatically switches theme based on local time:
 
-- Light mode: `6:00` to `17:59`
-- Dark mode: `18:00` to `5:59`
+* ☀️ Light mode: 06:00 → 17:59
+* 🌙 Dark mode: 18:00 → 05:59
 
-Manual toggles are kept in memory only. Refreshing the page returns the app to the time-based theme.
+Manual toggling is available per session (not persisted).
+
+---
+
+## 📌 Notes
+
+This project is part of my frontend portfolio.
+I’m available for freelance work involving:
+
+* React / TypeScript applications
+* API integrations
+* Responsive UI development
+
+---
