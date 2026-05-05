@@ -75,51 +75,49 @@ function CurrentWeatherCard({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex self-stretch flex-col items-start justify-between">
             <div className="min-w-0">
-              <p className="pl-2 text-sm font-medium leading-none text-neutral-200">
+              <p className="pl-2 text-lg sm:text-sm font-medium leading-none text-neutral-200">
                 Current weather
               </p>
-              <h2 className="font-display text-2xl font-bold leading-none text-neutral-0 sm:text-5xl">
+              <h2 className="font-display text-4xl font-bold leading-none text-neutral-0 sm:text-5xl">
                 {cityName}
               </h2>
             </div>
-            <div className="flex gap-3">
-              {sunrise && sunset ? (
-                <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                  <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
-                    <span className="relative grid size-9 shrink-0 place-items-center text-orange-500">
-                      <span className="absolute bottom-2 h-px w-7 bg-current" />
-                      <span className="size-4 rounded-full bg-current" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium text-neutral-300">
-                        Sunrise
-                      </p>
-                      <p className="text-base font-bold text-neutral-0">
-                        {formatTime(sunrise)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
-                    <span className="relative grid size-9 shrink-0 place-items-center text-blue-500">
-                      <span className="absolute top-2 h-px w-7 bg-current" />
-                      <span className="size-4 rounded-full bg-current" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium text-neutral-300">
-                        Sunset
-                      </p>
-                      <p className="text-base font-bold text-neutral-0">
-                        {formatTime(sunset)}
-                      </p>
-                    </div>
+            {sunrise && sunset ? (
+              <div className="mt-4 grid gap-3 grid-cols-2">
+                <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
+                  <span className="relative grid size-9 shrink-0 place-items-center text-orange-500">
+                    <span className="absolute bottom-2 h-px w-7 bg-current" />
+                    <span className="size-4 rounded-full bg-current" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-medium text-neutral-300">
+                      Sunrise
+                    </p>
+                    <p className="text-base font-bold text-neutral-0">
+                      {formatTime(sunrise)}
+                    </p>
                   </div>
                 </div>
-              ) : null}
-            </div>
+
+                <div className="flex items-center gap-3 rounded-lg bg-neutral-900/30 p-3">
+                  <span className="relative grid size-9 shrink-0 place-items-center text-blue-500">
+                    <span className="absolute top-2 h-px w-7 bg-current" />
+                    <span className="size-4 rounded-full bg-current" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-medium text-neutral-300">
+                      Sunset
+                    </p>
+                    <p className="text-base font-bold text-neutral-0">
+                      {formatTime(sunset)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </div>
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex sm:flex-col items-center justify-center">
             <img
               src={condition.icon}
               alt=""

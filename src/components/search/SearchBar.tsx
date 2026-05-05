@@ -4,7 +4,7 @@ import {
   useRef,
   useState,
   type ChangeEvent,
-  type FormEvent,
+  type SubmitEvent,
 } from "react";
 import searchIcon from "../../assets/images/icon-search.svg";
 import {
@@ -110,7 +110,7 @@ function SearchBar({
     }
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (normalizedQuery.length < 2) {
@@ -176,24 +176,24 @@ function SearchBar({
       {shouldShowSuggestions ? (
         <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-lg border border-app-border bg-app-surface shadow-[0_18px_45px_rgba(0,0,0,0.22)]">
           {isLoading ? (
-            <p className="px-4 py-3 text-sm font-medium text-app-text-muted">
+            <p className="px-3 py-2.5 text-sm font-medium text-app-text-muted sm:px-4 sm:py-3">
               Searching...
             </p>
           ) : null}
 
           {!isLoading && errorMessage !== "" ? (
-            <p className="px-4 py-3 text-sm font-medium text-app-text-muted">
+            <p className="px-3 py-2.5 text-sm font-medium text-app-text-muted sm:px-4 sm:py-3">
               {errorMessage}
             </p>
           ) : null}
 
           {!isLoading && suggestions.length > 0 ? (
-            <ul className="max-h-72 overflow-y-auto py-2">
+            <ul className="max-h-60 overflow-y-auto py-1.5 sm:max-h-72 sm:py-2">
               {suggestions.map((location) => (
                 <li key={location.id}>
                   <button
                     type="button"
-                    className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left transition hover:bg-app-surface-muted focus:bg-app-surface-muted focus:outline-none"
+                    className="flex w-full flex-col items-start gap-0.5 px-3 py-2.5 text-left transition hover:bg-app-surface-muted focus:bg-app-surface-muted focus:outline-none sm:gap-1 sm:px-4 sm:py-3"
                     onClick={() => handleLocationSelect(location)}
                   >
                     <span className="text-sm font-semibold text-app-text sm:text-base">

@@ -57,7 +57,7 @@ function HourlyForecastList({
   return (
     <div
       ref={scrollContainerRef}
-      className={`scrollbar-clean -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 select-none sm:-mx-5 sm:px-5 ${
+      className={`scrollbar-clean -mx-4 flex gap-2 overflow-x-auto px-4 pb-2 select-none sm:-mx-5 sm:gap-3 sm:px-5 ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       } ${className}`}
       onPointerDown={handlePointerDown}
@@ -72,18 +72,18 @@ function HourlyForecastList({
         return (
           <article
             key={forecast.time}
-            className="flex min-w-24 flex-col items-center gap-1.5 rounded-lg bg-app-surface-muted px-2 py-4 text-center"
+            className="flex min-w-20 flex-col items-center gap-1 rounded-lg bg-app-surface-muted px-2 py-3 text-center sm:min-w-24 sm:gap-1.5 sm:py-4"
           >
-            <p className="text-sm font-semibold text-app-text-muted">
+            <p className="text-xs font-semibold text-app-text-muted sm:text-sm">
               {formatHour(forecast.time)}
             </p>
             <img
               src={condition.icon}
               alt=""
-              className="size-12 object-contain"
+              className="size-10 object-contain sm:size-12"
               aria-hidden="true"
             />
-            <p className="text-2xl font-bold text-app-text">
+            <p className="text-xl font-bold text-app-text sm:text-2xl">
               {formatTemperature(forecast.temperature)}
             </p>
           </article>
