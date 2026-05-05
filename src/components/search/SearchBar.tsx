@@ -166,10 +166,10 @@ function SearchBar({
         <button
           type="submit"
           disabled={normalizedQuery.length < 2 || isLoading}
-          className="grid size-11 shrink-0 place-items-center rounded-md bg-blue-500 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-app-surface disabled:cursor-not-allowed disabled:bg-app-border sm:size-12"
+          className="grid size-9 shrink-0 place-items-center rounded-md bg-blue-500 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-app-surface disabled:cursor-not-allowed disabled:bg-app-border sm:size-10"
           aria-label="Search city"
         >
-          <img src={searchIcon} alt="" className="size-5" aria-hidden="true" />
+          <img src={searchIcon} alt="" className="size-4" aria-hidden="true" />
         </button>
       </div>
 

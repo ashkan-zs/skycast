@@ -3,6 +3,7 @@ import { getWeatherCondition } from "./weatherConditions";
 
 interface DailyForecastListProps {
   daily: DailyForecast[];
+  className?: string;
 }
 
 const formatTemperature = (temperature: number): string =>
@@ -13,9 +14,9 @@ const formatDay = (date: string): string =>
     weekday: "long",
   }).format(new Date(`${date}T12:00:00`));
 
-function DailyForecastList({ daily }: DailyForecastListProps) {
+function DailyForecastList({ daily, className = "" }: DailyForecastListProps) {
   return (
-    <div className="mt-5 flex flex-col gap-3">
+    <div className={`flex flex-col gap-3 ${className}`}>
       {daily.map((forecast) => {
         const condition = getWeatherCondition(forecast.weatherCode);
 

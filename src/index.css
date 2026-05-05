@@ -54,7 +54,7 @@
 :root {
   --app-background: hsl(250, 6%, 84%);
   --app-surface: hsl(0, 0%, 100%);
-  --app-surface-muted: hsl(250, 6%, 84%);
+  --app-surface-muted: hsl(240, 2%, 88%);
   --app-border: hsl(240, 6%, 70%);
   --app-text: hsl(243, 96%, 9%);
   --app-text-muted: hsl(243, 23%, 30%);

@@ -4,7 +4,8 @@ import SavedLocations from "./components/locations/SavedLocations";
 import SearchBar from "./components/search/SearchBar";
 import ThemeToggle from "./components/theme/ThemeToggle";
 import CurrentWeatherCard from "./components/weather/CurrentWeatherCard";
-import Forecast from "./components/weather/Forecast";
+import DailyForecastList from "./components/weather/DailyForecastList";
+import HourlyForecastList from "./components/weather/HourlyForecastList";
 import type { SavedLocation } from "./types/location";
 import {
   fetchWeather,
@@ -209,46 +210,75 @@ function App() {
 
   return (
     <AppLayout>
-      <section className="mx-auto flex w-full max-w-3xl flex-col gap-6 pt-8 sm:pt-12 lg:pt-16">
+      <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 pt-6">
         <div className="flex items-center justify-between gap-4">
           <h1 className="font-display text-4xl font-bold leading-tight text-app-text sm:text-5xl">
             SkyCast
           </h1>
           <ThemeToggle />
         </div>
-        <SearchBar onLocationSelect={handleLocationSelect} />
-        <SavedLocations
-          locations={savedLocations}
-          activeLocationId={selectedLocation?.id}
-          onLocationSelect={loadWeatherForSavedLocation}
-          onLocationRemove={handleSavedLocationRemove}
-        />
 
-        {isWeatherLoading ? (
-          <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
-            Loading current weather...
-          </div>
-        ) : null}
+        {!weatherData || isWeatherLoading || weatherError !== "" ? (
+          <>
+            <SearchBar onLocationSelect={handleLocationSelect} />
+            <SavedLocations
+              locations={savedLocations}
+              activeLocationId={selectedLocation?.id}
+              onLocationSelect={loadWeatherForSavedLocation}
+              onLocationRemove={handleSavedLocationRemove}
+            />
 
-        {weatherError !== "" ? (
-          <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
-            {weatherError}
-          </div>
+            {isWeatherLoading ? (
+              <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
+                Loading current weather...
+              </div>
+            ) : null}
+
+            {weatherError !== "" ? (
+              <div className="rounded-lg border border-app-border bg-app-surface p-6 text-base font-medium text-app-text-muted">
+                {weatherError}
+              </div>
+            ) : null}
+          </>
         ) : null}
 
         {!isWeatherLoading && weatherData ? (
-          <>
-            <CurrentWeatherCard
-              cityName={selectedCity}
-              weather={weatherData.current}
-              sunrise={weatherData.daily[0]?.sunrise}
-              sunset={weatherData.daily[0]?.sunset}
-              canSave={selectedLocation !== null}
-              isSaved={isSelectedLocationSaved}
-              onFavoriteToggle={handleFavoriteToggle}
-            />
-            <Forecast daily={weatherData.daily} hourly={weatherData.hourly} />
-          </>
+          <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
+            <div className="flex flex-col gap-6 lg:col-span-2">
+              <SearchBar onLocationSelect={handleLocationSelect} />
+              <SavedLocations
+                locations={savedLocations}
+                activeLocationId={selectedLocation?.id}
+                onLocationSelect={loadWeatherForSavedLocation}
+                onLocationRemove={handleSavedLocationRemove}
+              />
+              <CurrentWeatherCard
+                cityName={selectedCity}
+                weather={weatherData.current}
+                sunrise={weatherData.daily[0]?.sunrise}
+                sunset={weatherData.daily[0]?.sunset}
+                canSave={selectedLocation !== null}
+                isSaved={isSelectedLocationSaved}
+                onFavoriteToggle={handleFavoriteToggle}
+              />
+              <section className="rounded-lg border border-app-border/70 bg-app-surface/70 p-4 shadow-[0_24px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl backdrop-saturate-150 sm:p-5">
+                <h2 className="font-display text-2xl font-bold text-app-text">
+                  Hourly forecast
+                </h2>
+                <HourlyForecastList
+                  hourly={weatherData.hourly}
+                  className="mt-5"
+                />
+              </section>
+            </div>
+
+            <aside className="rounded-lg border border-app-border/70 bg-app-surface/70 p-4 shadow-[0_24px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl backdrop-saturate-150 sm:p-5 lg:col-span-1">
+              <h2 className="font-display text-2xl font-bold text-app-text">
+                Daily forecast
+              </h2>
+              <DailyForecastList daily={weatherData.daily} className="mt-5" />
+            </aside>
+          </div>
         ) : null}
       </section>
     </AppLayout>
